@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmsScheduler.MainPage">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <Button Text="Zaplanowane SMS" Clicked="onDelayedSmsPageClicked"></Button>
+        <BoxView WidthRequest="2" Color="Black"/>
+
+        <Entry x:Name="GroupNameEntry"
+               Placeholder="Nazwa nowej grupy" />
+
+        <Button Text="Dodaj grupę"
+                Clicked="OnAddGroupClicked" />
+
+        <Label Text="Lista grup:" 
+               FontAttributes="Bold"
+               FontSize="18" />
+
+        <CollectionView x:Name="GroupsCollection"
+                        ItemsSource="{Binding Groups}"
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems Mode="Reveal">
+                                <SwipeItem Text="Edytuj"
+                                   BackgroundColor="LightBlue"
+                                   Invoked="OnEditGroup"/>
+                                <SwipeItem Text="Usuń"
+                                   BackgroundColor="Tomato"
+                                   Invoked="OnDeleteGroup"/>
+                                <SwipeItem Text="SMS"
+                                   BackgroundColor="LightGreen"
+                                   Invoked="OnSendSms"/>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <Frame Margin="0,5"
+                       Padding="10"
+                       CornerRadius="10"
+                       BorderColor="LightGray">
+                            <Label Text="{Binding Name}" 
+                           FontSize="16"/>
+                        </Frame>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+
+</ContentPage>
